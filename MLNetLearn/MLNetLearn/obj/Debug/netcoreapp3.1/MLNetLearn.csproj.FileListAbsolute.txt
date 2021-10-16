@@ -1,0 +1,4 @@
+C:\Users\User\source\repos\AI_Face_Recognition\MLNetLearn\MLNetLearn\bin\Debug\netcoreapp3.1\MLNetLearn.exe
+C:\Users\User\source\repos\AI_Face_Recognition\MLNetLearn\MLNetLearn\obj\Debug\netcoreapp3.1\MLNetLearn.csprojAssemblyReference.cache
+C:\Users\User\source\repos\AI_Face_Recognition\MLNetLearn\MLNetLearn\obj\Debug\netcoreapp3.1\MLNetLearn.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\AI_Face_Recognition\MLNetLearn\MLNetLearn\obj\Debug\netcoreapp3.1\MLNetLearn.AssemblyInfo.cs
