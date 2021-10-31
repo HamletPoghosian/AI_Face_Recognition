@@ -28,9 +28,14 @@ print(predictions)
 
 # joblib.dump(model,'music-recommender.joblib')
 model = joblib.load('music-recommender.joblib')
-predictions = model.predict([ [32, 0] , [30, 1]])
+predictions = model.predict([ [32, 0], [30, 1]])
 print(predictions)
 
 # drow predicition tree
 
-tree.export_graphviz(model)
+tree.export_graphviz(model,out_file='music-recommender.dot',
+                     feature_names=['age','gender'],
+                     class_names=sorted(y.unique()),
+                     label='all',
+                     rounded=True,
+                     filled=True)
