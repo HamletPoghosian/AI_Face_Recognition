@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn import tree
 import joblib
 
 music_data = pd.read_csv('music.csv')
@@ -21,3 +22,15 @@ model = DecisionTreeClassifier()
 model.fit(X, y)
 predictions = model.predict([[20,1]])
 print(predictions)
+
+
+# predicition with model
+
+# joblib.dump(model,'music-recommender.joblib')
+model = joblib.load('music-recommender.joblib')
+predictions = model.predict([ [32, 0] , [30, 1]])
+print(predictions)
+
+# drow predicition tree
+
+tree.export_graphviz(model)
