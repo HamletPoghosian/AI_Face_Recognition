@@ -5,8 +5,17 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn import tree
 import joblib
+from sklearn import preprocessing
 
+
+# show model
 mapping_data = pd.read_csv('dynamicmappings.csv')
+data = mapping_data['keyinname']
+values = array(data)
+label_encoder = preprocessing.LabelEncoder()
+mapping_data['keyinLabel'] = label_encoder.fit_transform(values)
+print(mapping_data)
+
 X = mapping_data.drop(columns=['keyinname','keyout'])
 y = mapping_data['keyout']
 
@@ -23,6 +32,8 @@ y = mapping_data['keyout']
 # print(integer_encoded)
 
 
+
+
 # train ML and test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 model = DecisionTreeClassifier()
@@ -34,14 +45,16 @@ print(score)
 # prediction based on model
 model = DecisionTreeClassifier()
 model.fit(X.values, y.values)
-predictions = model.predict([[7,7],[5,7]])
+predictions = model.predict([[7,5],[2,8]])
 print(predictions)
 
-
+# train one time and use always  with joblib
 # joblib.dump(model,'mapping-recommender.joblib')
 model = joblib.load('mapping-recommender.joblib')
-predictions = model.predict([[7,7],[5,7]])
+predictions = model.predict([[7,5],[2,8]])
 print(predictions)
+# [7,5] means  type = 7   keyinLabel = 5 so keyout will be Items , keyin will be items
+
 
 # drow predicition tree
 
@@ -53,4 +66,4 @@ tree.export_graphviz(model,out_file='mapping-recommender.dot',
                      filled=True)
 
 
-# use this web site to drow diagram of ML algoritm https://dreampuf.github.io/GraphvizOnline/
+# use this web site to drow diagram of ML algoritm https://dreampuf.github.io/GraphvizOnline/  or https://edotor.net/
