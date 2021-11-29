@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score
 from sklearn import tree
 import joblib
 from sklearn import preprocessing
+import csv
 
 
 # show model
@@ -14,12 +15,37 @@ data = mapping_data['Key_in']
 values = array(data)
 label_encoder = preprocessing.LabelEncoder()
 mapping_data['keyinLabel'] = label_encoder.fit_transform(values)
-# mapping_data['keyinLabelValue'] = label_encoder.inverse_transform(mapping_data['keyinLabel'] )
 
-print(mapping_data)
 
 X = mapping_data.drop(columns=['Key_in','key_out'])
 y = mapping_data['key_out']
+# mapping_data['keyinLabelValue'] = label_encoder.inverse_transform(mapping_data['keyinLabel'] )
+
+keyin_input = input()
+keyin_type = eval(input())
+predictiondata=''
+
+iter = -1
+myData = pd.read_csv("mapping_base.csv")
+for row in myData['key_in']:
+    iter +=1
+    if row == keyin_input:
+        predictiondata = myData['key_in_label'][iter]
+
+# step 1 , we have already trained model , so every next mapping should convert keyinLabel .write in csv and use everytime
+# with open('mapping_base.csv', 'a',newline='') as f:
+#     writer = csv.writer(f)
+#     header =['key_in', 'key_in_label']
+#     writer.writerow(header)
+#     kk=-1
+#     for row in mapping_data['Key_in']:
+#             kk += 1
+#             writer.writerow((mapping_data['Key_in'][kk],mapping_data['keyinLabel'][kk]))
+#
+#     f.close()
+
+
+
 
 # encoding value to set into algortim , string cant use in ML , only Integer ,
 # # train=convert(X)
@@ -56,11 +82,11 @@ model = joblib.load('mapping-recommender.joblib')
 # predict [ type =7(loop) , keyinLabel =5(Items as label code)]
 
 # prediction Key Out  property name
-predictions = model.predict([[3,59]])
+predictions = model.predict([[keyin_type,predictiondata]])
 print('KeyOut will be :',predictions[0])
 
 # encoded to find keyIn property name
-keyin_name = label_encoder.inverse_transform([59])
+keyin_name = label_encoder.inverse_transform([predictiondata])
 print('KeyIn will be :',keyin_name[0])
 # [7,5] means  type = 7   keyinLabel = 5 so keyout will be Items , keyin will be items
 
