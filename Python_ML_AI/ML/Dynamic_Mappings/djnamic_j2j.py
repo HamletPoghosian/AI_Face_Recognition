@@ -88,6 +88,11 @@ print('KeyOut will be :',predictions[0])
 # encoded to find keyIn property name
 keyin_name = label_encoder.inverse_transform([predictiondata])
 print('KeyIn will be :',keyin_name[0])
+
+
+print('Type will be :',keyin_type)
+
+
 # [7,5] means  type = 7   keyinLabel = 5 so keyout will be Items , keyin will be items
 
 
