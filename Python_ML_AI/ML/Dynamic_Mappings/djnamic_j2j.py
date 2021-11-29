@@ -9,17 +9,17 @@ from sklearn import preprocessing
 
 
 # show model
-mapping_data = pd.read_csv('dynamicmappings.csv')
-data = mapping_data['keyinname']
+mapping_data = pd.read_csv('dynamic_mapping_ml.csv')
+data = mapping_data['Key_in']
 values = array(data)
 label_encoder = preprocessing.LabelEncoder()
 mapping_data['keyinLabel'] = label_encoder.fit_transform(values)
 # mapping_data['keyinLabelValue'] = label_encoder.inverse_transform(mapping_data['keyinLabel'] )
 
-# print(mapping_data)
+print(mapping_data)
 
-X = mapping_data.drop(columns=['keyinname','keyout'])
-y = mapping_data['keyout']
+X = mapping_data.drop(columns=['Key_in','key_out'])
+y = mapping_data['key_out']
 
 # encoding value to set into algortim , string cant use in ML , only Integer ,
 # # train=convert(X)
@@ -56,11 +56,11 @@ model = joblib.load('mapping-recommender.joblib')
 # predict [ type =7(loop) , keyinLabel =5(Items as label code)]
 
 # prediction Key Out  property name
-predictions = model.predict([[7,5]])
+predictions = model.predict([[3,59]])
 print('KeyOut will be :',predictions[0])
 
 # encoded to find keyIn property name
-keyin_name = label_encoder.inverse_transform([5])
+keyin_name = label_encoder.inverse_transform([59])
 print('KeyIn will be :',keyin_name[0])
 # [7,5] means  type = 7   keyinLabel = 5 so keyout will be Items , keyin will be items
 
